@@ -16,8 +16,6 @@ api = HfApi(token=os.getenv("HF_TOKEN"))
 DATASET_PATH = "hf://datasets/mailmukulranjan/tourism-package-prediction/tourism.csv"
 df = pd.read_csv(DATASET_PATH)
 print("Dataset loaded successfully.")
-# Data Cleaning
-print("Initial shape:", df.shape)
 # Drop unique identifier column (not useful for modeling)
 df.drop(columns=['CustomerID'], inplace=True)
 # Handle missing values
@@ -75,7 +73,10 @@ X_test.to_csv('tourism_project/model_building/X_test.csv', index=False)
 y_train.to_csv('tourism_project/model_building/y_train.csv', index=False)
 y_test.to_csv('tourism_project/model_building/y_test.csv', index=False)
 
-files = ["X_train.csv","X_test.csv","y_train.csv","y_test.csv"]
+files = ["tourism_project/model_building/X_train.csv",
+         "tourism_project/model_building/X_test.csv",
+         "tourism_project/model_building/y_train.csv",
+         "tourism_project/model_building/y_test.csv"]
 
 for file_path in files:
     api.upload_file(
